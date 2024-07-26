@@ -6,10 +6,10 @@ from parc.configs.edf.constants import FrenchNuclearUnitLevel
 
 # DAMPIERRE
 DAM = Site(
-    name="gra",
+    name="dam",
     units=[
         FrenchNuclearUnit(
-            name="gra" + str(i + 1),
+            name="dam" + str(i + 1),
             technology=UnitTechnology.NUCLEAR,
             level=FrenchNuclearUnitLevel.CP1,
         )

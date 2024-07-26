@@ -18,3 +18,6 @@ class FrenchNuclearUnit(NuclearUnit):
             technology=technology, name=name, electricity_producer=electricity_producer
         )
         self.level = level
+
+    def __repr__(self) -> str:
+        return "<☢️ " + self.level + ": " + self.name + ">"

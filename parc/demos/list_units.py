@@ -1,7 +1,6 @@
-from parc.configs.edf.sites.nuc.fla import FLA1
 from parc.configs.edf.france import FRENCH_GRID
+from parc.configs.edf.sites.nuc.fla import FLA1
 from parc.constants import UnitTechnology
-
 
 # Example of one site
 print(FLA1.name)

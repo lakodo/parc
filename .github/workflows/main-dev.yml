@@ -1,4 +1,4 @@
-name: Main
+name: Main and Dev
 
 on:
   push:

@@ -1,4 +1,4 @@
-from enum import StrEnum
+from parc.utils.types import StrEnum
 
 
 class UnitTechnology(StrEnum):

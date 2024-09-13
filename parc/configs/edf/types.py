@@ -1,4 +1,3 @@
-from parc.constants import UnitTechnology
 from parc.technologies.nuc import NuclearUnit
 
 from .constants import FrenchNuclearUnitLevel
@@ -11,11 +10,10 @@ class FrenchNuclearUnit(NuclearUnit):
         self,
         *,
         level: FrenchNuclearUnitLevel,
-        technology: UnitTechnology,
         name: str,
         electricity_producer: bool = True,
     ):
-        super().__init__(technology=technology, name=name, electricity_producer=electricity_producer)
+        super().__init__(name=name, electricity_producer=electricity_producer)
         self.level = level
 
     def __repr__(self) -> str:

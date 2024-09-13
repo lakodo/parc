@@ -25,6 +25,7 @@ class Unit:
         self.electricity_producer = electricity_producer
         self._unique_key = name + technology + str(electricity_producer)
         if self._unique_key in _ALL_UNITS:
+            # a unit must be unique
             raise UniqueUnitError(_ALL_UNITS[self._unique_key])
         _ALL_UNITS[self._unique_key] = self
 

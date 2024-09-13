@@ -6,69 +6,41 @@
 [![Commit activity](https://img.shields.io/github/commit-activity/m/lakodo/parc)](https://img.shields.io/github/commit-activity/m/lakodo/parc)
 [![License](https://img.shields.io/github/license/lakodo/parc)](https://img.shields.io/github/license/lakodo/parc)
 
-A model of Earth electric grid
+A model of Earth electric grid, from France to Japan, from nuclear plant to solar panel farms, from average power per site up to pressure in a pipe.
 
 - **Github repository**: <https://github.com/lakodo/parc/>
 - **Documentation** <https://lakodo.github.io/parc/>
 
-## Getting started with your project
+## motivation
 
-### 1. Create a New Repository
+>
+    How to compare French production to Italy production?
 
-First, create a repository on GitHub with the same name as this project, and then run the following commands:
+    How to compute the montlhy average renewable energy of Europe against USA?
 
-```bash
-git init -b main
-git add .
-git commit -m "init commit"
-git remote add origin git@github.com:lakodo/parc.git
-git push -u origin main
-```
+    What about EDF performance against RWE?
 
-### 2. Set Up Your Development Environment
+    Any idea about the impact of quitting nuclear energy in Germany?
 
-Then, install the environment and the pre-commit hooks with
+    What hardware is used on prem here and there?
 
-```bash
-make install
-```
+To answer these question we need to represent our international grid on a common structure. I found none, so here is "parc", an open source python library to store/structure and deliver public information about ALL electricity production systems.
 
-This will also generate your `uv.lock` file
+## Sources
 
-### 3. Run the pre-commit hooks
+In order to keep this project open source all the information available in this library should always be public. Contributors should quote their public sources in the codebase when sharing information.
 
-Initially, the CI/CD pipeline might be failing due to formatting issues. To resolve those run:
+## Useful resources
 
-```bash
-uv run pre-commit run -a
-```
+- <https://www.rte-france.com/eco2mix>
+- <https://app.electricitymaps.com/>
 
-### 4. Commit the changes
+## About the author
 
-Lastly, commit the changes made by the two steps above to your repository.
+I'm PhD Joris GUERRY, research engineer at EDF (Electricité de France). Check out my Linkedin profile if you want to know more: <https://linkedin.com/in/jorisguerry>
 
-```bash
-git add .
-git commit -m 'Fix formatting issues'
-git push origin main
-```
+## Looking for an internship or a job in datascience/energy?
 
-You are now ready to start development on your project!
-The CI/CD pipeline will be triggered when you open a pull request, merge to main, or when you create a new release.
+Recruiting platform(s) of the contributor(s):
 
-To finalize the set-up for publishing to PyPI, see [here](https://fpgmaas.github.io/cookiecutter-uv/features/publishing/#set-up-for-pypi).
-For activating the automatic documentation with MkDocs, see [here](https://fpgmaas.github.io/cookiecutter-uv/features/mkdocs/#enabling-the-documentation-on-github).
-To enable the code coverage reports, see [here](https://fpgmaas.github.io/cookiecutter-uv/features/codecov/).
-
-## Releasing a new version
-
-- Create an API Token on [PyPI](https://pypi.org/).
-- Add the API Token to your projects secrets with the name `PYPI_TOKEN` by visiting [this page](https://github.com/lakodo/parc/settings/secrets/actions/new).
-- Create a [new release](https://github.com/lakodo/parc/releases/new) on Github.
-- Create a new tag in the form `*.*.*`.
-
-For more details, see [here](https://fpgmaas.github.io/cookiecutter-uv/features/cicd/#how-to-trigger-a-release).
-
----
-
-Repository initiated with [fpgmaas/cookiecutter-uv](https://github.com/fpgmaas/cookiecutter-uv).
+- EDF Recrute <https://www.edf.fr/edf-recrute>

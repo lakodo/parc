@@ -1,16 +1,15 @@
 from .unit import Unit
-import typing
 
 
-class Site(object):
+class Site:
     """
     units: only use
     """
 
     name: str
-    units: typing.List[Unit]
+    units: list[Unit]
 
-    def __init__(self, *, name: str, units: typing.List[Unit]):
+    def __init__(self, *, name: str, units: list[Unit]):
         self.name = name
         self.units = units
 

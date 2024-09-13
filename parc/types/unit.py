@@ -1,9 +1,8 @@
-import typing
 from parc.constants import UnitTechnology
 from parc.types.errors import UniqueUnitError
 
 
-class Unit(object):
+class Unit:
     """
 
     electricity_producer: can be false for common buildings (storage, control rooms...)
@@ -33,4 +32,4 @@ class Unit(object):
         return "<unit(" + self.technology + "): " + self.name + ">"
 
 
-_ALL_UNITS: typing.Dict[str, Unit] = {}
+_ALL_UNITS: dict[str, Unit] = {}

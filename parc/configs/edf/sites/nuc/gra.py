@@ -1,7 +1,7 @@
-from parc.types import Site
-from parc.constants import UnitTechnology
-from parc.configs.edf.types import FrenchNuclearUnit
 from parc.configs.edf.constants import FrenchNuclearUnitLevel
+from parc.configs.edf.types import FrenchNuclearUnit
+from parc.constants import UnitTechnology
+from parc.types import Site
 
 # GRAVELINES
 GRA = Site(

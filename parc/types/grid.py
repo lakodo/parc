@@ -1,13 +1,16 @@
-import typing
+from typing import Optional
+
 from .site import Site
 
 
-class Grid(object):
+class Grid:
     """A grid is just a list of units"""
 
-    sites: typing.List[Site]
+    sites: list[Site]
     name: str
 
-    def __init__(self, *, name: str = "grid", sites: typing.List[Site] = []):
+    def __init__(self, *, name: str = "grid", sites: Optional[list[Site]] = None):
+        if sites is None:
+            sites = []
         self.name = name
         self.sites = sites

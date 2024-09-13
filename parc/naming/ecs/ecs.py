@@ -22,6 +22,4 @@ class ElementarySystems(StrEnum):
     Y = " Installations d'essai "
 
 
-
-
 # print(ElementarySystems["A"],ElementarySystems._member_map_.keys())

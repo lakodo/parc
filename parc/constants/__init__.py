@@ -1,3 +1,3 @@
 from .constants import UnitTechnology
 
-__all__ = [UnitTechnology]
+__all__ = ["UnitTechnology"]

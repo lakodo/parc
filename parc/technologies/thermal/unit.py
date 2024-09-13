@@ -1,5 +1,4 @@
-import typing
-from parc.types import Unit, Site
+from parc.types import Site, Unit
 
 
 class ThermalPowerUnit(Unit):
@@ -7,5 +6,5 @@ class ThermalPowerUnit(Unit):
 
 
 class ThermalPowerStation(Site):
-    def __init__(self, *, name: str, units: typing.List[str]):
+    def __init__(self, *, name: str, units: list[Unit]):
         super().__init__(name=name, units=units)

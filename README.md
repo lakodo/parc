@@ -14,6 +14,7 @@ A model of Earth electric grid, from France to Japan, from nuclear plant to sola
 ## motivation
 
 >
+
     How to compare French production to Italy production?
 
     How to compute the montlhy average renewable energy of Europe against USA?

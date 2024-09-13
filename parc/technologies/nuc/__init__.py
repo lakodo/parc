@@ -1,3 +1,3 @@
 from .unit import NuclearUnit
 
-__all__ = [NuclearUnit]
+__all__ = ["NuclearUnit"]

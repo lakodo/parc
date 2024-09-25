@@ -1,7 +1,7 @@
 # parc
 
 [![Release](https://img.shields.io/github/v/release/lakodo/parc)](https://img.shields.io/github/v/release/lakodo/parc)
-[![Build status](https://img.shields.io/github/actions/workflow/status/lakodo/parc/main.yml?branch=main)](https://github.com/lakodo/parc/actions/workflows/main.yml?query=branch%3Amain)
+[![Build status](https://img.shields.io/github/actions/workflow/status/lakodo/parc/main-dev.yml?branch=dev)](https://github.com/lakodo/parc/actions/workflows/main-dev.yml?query=branch%3Adev)
 [![codecov](https://codecov.io/gh/lakodo/parc/branch/main/graph/badge.svg)](https://codecov.io/gh/lakodo/parc)
 [![Commit activity](https://img.shields.io/github/commit-activity/m/lakodo/parc)](https://img.shields.io/github/commit-activity/m/lakodo/parc)
 [![License](https://img.shields.io/github/license/lakodo/parc)](https://img.shields.io/github/license/lakodo/parc)

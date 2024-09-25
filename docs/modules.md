@@ -1,1 +1,10 @@
-::: parc.foo
+::: parc
+::: parc.configs
+::: parc.constants
+::: parc.databases
+::: parc.grids
+::: parc.naming
+::: parc.sites
+::: parc.technologies
+::: parc.types
+::: parc.utils

@@ -6,11 +6,14 @@ authors = [{ name = "Joris GUERRY", email = "j@9h.gg" }]
 readme = "README.md"
 keywords = ['python']
 requires-python = ">=3.9,<=3.12"
+dependencies = [
+
+]
 
 [project.urls]
 Homepage = "https://lakodo.github.io/parc/"
 Repository = "https://github.com/lakodo/parc"
-Documentation = "https://lakodo.github.io/parc/"
+Documentation = "https://lako.do/parc/"
 
 [tool.uv]
 dev-dependencies = [
@@ -24,7 +27,9 @@ dev-dependencies = [
     "mkdocs>=1.4.2",
     "mkdocs-material>=8.5.10",
     "mkdocstrings[python]>=0.19.0",
+    "griffe-typingdoc>=0.2.7",
 ]
+
 
 [build-system]
 requires = ["setuptools >= 61.0"]
@@ -85,7 +90,6 @@ lint.ignore = [
     # DoNotAssignLambda
     "E731",
 ]
-
 
 [tool.ruff.format]
 preview = true

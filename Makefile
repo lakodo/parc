@@ -48,6 +48,10 @@ docs-test: ## Test if documentation can be built without warnings or errors
 docs: ## Build and serve the documentation
 	@uv run mkdocs serve
 
+.PHONY: demo
+demo: ## Run a simple demo
+	@uv run python parc/demos/list_units.py
+
 .PHONY: docs-release
 docs-release: ## Build and release the documentation
 	@uv run mkdocs gh-deploy --force

@@ -1,14 +1,13 @@
-from parc.configs.edf.constants import FrenchNuclearUnitLevel
+from parc.configs.edf.constants import FrenchNuclearUnitDesign
 from parc.configs.edf.types import FrenchNuclearUnit
 from parc.types import Site
 
-# GRAVELINES
-GRA = Site(
-    name="gra",
+GRAVELINES = Site(
+    name="Gravelines",
     units=[
         FrenchNuclearUnit(
             name="gra" + str(i + 1),
-            level=FrenchNuclearUnitLevel.CP1,
+            design=FrenchNuclearUnitDesign.CP1,
         )
         for i in range(6)
     ],

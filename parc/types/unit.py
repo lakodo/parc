@@ -1,3 +1,5 @@
+from typing import Callable
+
 from parc.constants import UnitTechnology
 from parc.types.errors import UniqueUnitError
 
@@ -31,6 +33,21 @@ class Unit:
 
     def __repr__(self) -> str:
         return "<unit(" + self.technology + "): " + self.name + ">"
+
+    @classmethod
+    def list_all(cls, fn: Callable[["Unit"], bool] = lambda _: True, include_other_units: bool = False):
+        """List all created `Unit`.
+
+        An optional filtering function can be set.
+        This method is mainly intended to be use with a getter like this:
+        ```python
+        @property
+        def get_900(cls):
+            return cls.filter(lambda u: u.<whatever_property> == <something>)
+        """
+        if include_other_units:
+            return filter(fn, _ALL_UNITS.values())
+        return filter(fn, (unit for unit in _ALL_UNITS.values() if isinstance(unit, cls)))
 
 
 _ALL_UNITS: dict[str, Unit] = {}

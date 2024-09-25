@@ -1,3 +1,5 @@
+from typing import Any, Optional
+
 from .unit import Unit
 
 
@@ -7,10 +9,12 @@ class Site:
     """
 
     name: str
-    units: list[Unit]
+    name_full: Optional[str]
+    units: list[Unit[Any]]
 
-    def __init__(self, *, name: str, units: list[Unit]):
+    def __init__(self, *, name: str, name_full: Optional[str] = None, units: list[Unit[Any]]):
         self.name = name
+        self.name_full = name_full
         self.units = units
 
     def __repr__(self) -> str:

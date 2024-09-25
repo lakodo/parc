@@ -45,9 +45,13 @@ class Unit:
         def get_900(cls):
             return cls.filter(lambda u: u.<whatever_property> == <something>)
         """
-        if include_other_units:
-            return filter(fn, _ALL_UNITS.values())
-        return filter(fn, (unit for unit in _ALL_UNITS.values() if isinstance(unit, cls)))
+
+        units = sorted(_ALL_UNITS.values(), key=lambda u: u.name)
+
+        if not include_other_units:
+            # remove unit of different class (can be different after inheritance)
+            units = [unit for unit in _ALL_UNITS.values() if isinstance(unit, cls)]
+        return list(filter(fn, units))
 
 
 _ALL_UNITS: dict[str, Unit] = {}

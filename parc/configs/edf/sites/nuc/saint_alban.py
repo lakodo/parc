@@ -5,10 +5,7 @@ from parc.types import Site
 SAINT_ALBAN = Site(
     name="Saint Alban",
     units=[
-        FrenchNuclearUnit(
-            name="sal" + str(i + 1),
-            design=FrenchNuclearUnitDesign.P4,
-        )
-        for i in range(2)
+        FrenchNuclearUnit(name="sal1", design=FrenchNuclearUnitDesign.P4),
+        FrenchNuclearUnit(name="sal2", design=FrenchNuclearUnitDesign.P4),
     ],
 )

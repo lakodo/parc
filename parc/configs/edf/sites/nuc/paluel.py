@@ -5,10 +5,9 @@ from parc.types import Site
 PALUEL = Site(
     name="Paluel",
     units=[
-        FrenchNuclearUnit(
-            name="bla" + str(i + 1),
-            design=FrenchNuclearUnitDesign.P4,
-        )
-        for i in range(4)
+        FrenchNuclearUnit(name="pal1", design=FrenchNuclearUnitDesign.P4),
+        FrenchNuclearUnit(name="pal2", design=FrenchNuclearUnitDesign.P4),
+        FrenchNuclearUnit(name="pal3", design=FrenchNuclearUnitDesign.P4),
+        FrenchNuclearUnit(name="pal4", design=FrenchNuclearUnitDesign.P4),
     ],
 )

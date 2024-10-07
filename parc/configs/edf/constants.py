@@ -5,7 +5,7 @@ class FrenchNuclearUnitDesign(StrEnum):
     """List of the different design of French nuclear plant owned by EDF"""
 
     CP0 = "CP0"
-    CP1 = "CP1"  #  CPY
+    CP1 = "CP1"  # CPY
     CP2 = "CP2"  # CPY
     P4 = "P4"
     PP4 = "P'4"
@@ -13,14 +13,11 @@ class FrenchNuclearUnitDesign(StrEnum):
     EPR = "EPR"
 
     @property
-    def power(self):
+    def power(self) -> int:
         return FRENCH_LEVEL_DEFAULT_POWER_MAPPING[self]
 
     def __repr__(self) -> str:
         return f"{self.value}"
-
-    def __str__(self) -> str:
-        return self.__repr__()
 
 
 FRENCH_LEVEL_DEFAULT_POWER_MAPPING = {

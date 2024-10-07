@@ -6,8 +6,8 @@ SAINT_LAURENT = Site(
     name="Saint Laurent",
     units=[
         FrenchNuclearUnit(
-            name="sla" + str(i + 1),
-            design=FrenchNuclearUnitDesign.CP1,
+            name="slb" + str(i + 1),
+            design=FrenchNuclearUnitDesign.CP2,
         )
         for i in range(2)
     ],

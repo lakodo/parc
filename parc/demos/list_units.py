@@ -19,7 +19,7 @@ for site in FRENCH_GRID.sites:
 
 print("\n\n\n")
 
-print(f"French 900: {len(FrenchNuclearUnit.get_900())} units")
+print(f"French  900: {len(FrenchNuclearUnit.get_900())} units")
 print(f"French 1300: {len(FrenchNuclearUnit.get_1300())} units")
 print(f"French 1450: {len(FrenchNuclearUnit.get_1450())} units")
 print(f"French 1600: {len(FrenchNuclearUnit.get_1600())} units")

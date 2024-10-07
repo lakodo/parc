@@ -9,8 +9,3 @@ BELLEVILLE = Site(
         BEL2 := FrenchNuclearUnit(name="bel2", design=FrenchNuclearUnitDesign.PP4),
     ],
 )
-
-
-# print(BEL1)
-# print(BELLEVILLE)
-# print(BELLEVILLE.units)

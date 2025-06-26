@@ -35,6 +35,7 @@ In order to keep this project open source all the information available in this 
 
 - <https://www.rte-france.com/eco2mix>
 - <https://app.electricitymaps.com/>
+- source "CP2": <https://www.asn.fr/tout-sur-l-asn/l-asn-en-region/centre-val-de-loire/site-de-chinon#:~:text=R%C3%A9acteurs%20REP,et%20appartient%20au%20palier%20CP2>.
 
 ## About the author
 

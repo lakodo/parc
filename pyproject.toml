@@ -5,63 +5,51 @@ description = "A model of Earth electric grid"
 authors = [{ name = "Joris GUERRY", email = "j@9h.gg" }]
 readme = "README.md"
 keywords = ['python']
-requires-python = ">=3.9,<=3.12"
-dependencies = [
-    "pydantic>=2.9.2",
-]
+requires-python = ">=3.10,<4.0"
+dependencies = ["pydantic>=2.9.2"]
 
 [project.urls]
 Homepage = "https://lakodo.github.io/parc/"
 Repository = "https://github.com/lakodo/parc"
 Documentation = "https://lako.do/parc/"
 
-[tool.uv]
-dev-dependencies = [
-    "pytest>=7.2.0",
-    "pre-commit>=2.20.0",
-    "tox>=3.25.1",
-    "deptry>=0.20.0",
-    "mypy>=0.991",
-    "pytest-cov>=4.0.0",
-    "ruff>=0.0.235",
-    "mkdocs>=1.4.2",
-    "mkdocs-material>=8.5.10",
-    "mkdocstrings[python]>=0.19.0",
-    "griffe-typingdoc>=0.2.7",
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pre-commit>=4.5.1",
+    "tox-uv>=1.29.0",
+    "deptry>=0.24.0",
+    "ty>=0.0.14",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.14",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.7.1",
+    "mkdocstrings[python]>=1.0.2",
+    "jean-michel",
 ]
 
-
 [build-system]
-requires = ["setuptools >= 61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["."] # list of folders that contain the packages (["."] by default)
-include = [
-    "parc",
-] # package names should match these glob patterns (["*"] by default)
-exclude = [] # exclude packages matching these glob patterns (empty by default)
-namespaces = false # to disable scanning PEP 420 namespaces (true by default)
+[tool.hatch.build.targets.wheel]
+packages = ["parc"]
 
-
-[tool.mypy]
-files = ["parc"]
-disallow_untyped_defs = "True"
-disallow_any_unimported = "True"
-no_implicit_optional = "True"
-check_untyped_defs = "True"
-warn_return_any = "True"
-warn_unused_ignores = "True"
-show_error_codes = "True"
+[tool.ty.environment]
+python = "./.venv"
+python-version = "3.10"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py310"
 line-length = 120
 fix = true
-lint.select = [
+
+[tool.ruff.lint]
+select = [
     # flake8-2020
     "YTT",
     # flake8-bandit
@@ -94,12 +82,15 @@ lint.select = [
     # tryceratops
     "TRY",
 ]
-lint.ignore = [
+ignore = [
     # LineTooLong
     "E501",
     # DoNotAssignLambda
     "E731",
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
 
 [tool.ruff.format]
 preview = true
@@ -111,6 +102,5 @@ skip_empty = true
 branch = true
 source = ["parc"]
 
-
-[tool.ruff.lint.per-file-ignores]
-"tests/*" = ["S101"]
+[tool.uv.sources]
+jean-michel = { path = "../jean-michel", editable = true }

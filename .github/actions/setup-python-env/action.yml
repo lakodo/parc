@@ -10,15 +10,14 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-python@v5
+    - uses: actions/setup-python@v6
       with:
         python-version: ${{ inputs.python-version }}
 
     - name: Install uv
-      run: pipx install uv
-      env:
-        UV_VERSION: "0.4.2"
-      shell: bash
+      uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+      with:
+        enable-cache: true
 
     - name: Install Python dependencies
       run: uv sync --frozen

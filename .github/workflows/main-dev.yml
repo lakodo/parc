@@ -11,9 +11,11 @@ on:
 jobs:
   quality:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - uses: actions/cache@v4
         with:
@@ -28,16 +30,18 @@ jobs:
 
   tests-and-type-check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
       fail-fast: false
     defaults:
       run:
         shell: bash
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up the environment
         uses: ./.github/actions/setup-python-env
@@ -48,17 +52,21 @@ jobs:
         run: uv run python -m pytest tests --cov --cov-config=pyproject.toml --cov-report=xml
 
       - name: Check typing
-        run: uv run mypy
+        run: uv run mypy parc tests
 
       - name: Upload coverage reports to Codecov with GitHub Action on Python 3.11
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         if: ${{ matrix.python-version == '3.11' }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   check-docs:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up the environment
         uses: ./.github/actions/setup-python-env

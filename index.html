@@ -333,6 +333,106 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inspect-a-single-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inspect a single unit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#browse-an-entire-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Browse an entire grid
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-units-by-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Query units by design
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CLI tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extract-references-from-a-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extract references from a string
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extract-references-from-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extract references from a file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate-a-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validate a reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sources" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -476,6 +576,106 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quick start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inspect-a-single-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inspect a single unit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#browse-an-entire-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Browse an entire grid
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-units-by-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Query units by design
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CLI tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extract-references-from-a-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extract references from a string
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extract-references-from-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extract references from a file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate-a-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validate a reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sources" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -555,6 +755,49 @@
 <p>What hardware is used on prem here and there?</p>
 </blockquote>
 <p>To answer these questions we need to represent our international grid on a common structure. I found none, so here is <strong>parc</strong> — an open source Python library to store, structure, and deliver public information about all electricity production systems.</p>
+<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<h3 id="inspect-a-single-unit">Inspect a single unit<a class="headerlink" href="#inspect-a-single-unit" title="Permanent link">&para;</a></h3>
+<pre><code class="language-python">from parc.configs.edf.sites.nuc.belleville import BEL1
+
+print(BEL1.name)    # bel1
+print(BEL1.power)
+print(BEL1.design)  # FrenchNuclearUnitDesign.PP4
+</code></pre>
+<h3 id="browse-an-entire-grid">Browse an entire grid<a class="headerlink" href="#browse-an-entire-grid" title="Permanent link">&para;</a></h3>
+<pre><code class="language-python">from parc.configs.edf.france import FRENCH_GRID
+from parc.constants import UnitTechnology
+
+for site in FRENCH_GRID.sites:
+    for unit in site.units:
+        if unit.technology == UnitTechnology.NUCLEAR:
+            print(site, &quot;→&quot;, unit)
+</code></pre>
+<h3 id="query-units-by-design">Query units by design<a class="headerlink" href="#query-units-by-design" title="Permanent link">&para;</a></h3>
+<pre><code class="language-python">from parc.configs.edf.types import FrenchNuclearUnit
+
+print(f&quot;900 MW series : {len(FrenchNuclearUnit.get_900())} units&quot;)
+print(f&quot;1300 MW series: {len(FrenchNuclearUnit.get_1300())} units&quot;)
+print(f&quot;1450 MW series: {len(FrenchNuclearUnit.get_1450())} units&quot;)
+print(f&quot;1600 MW series: {len(FrenchNuclearUnit.get_1600())} units&quot;)
+</code></pre>
+<h2 id="cli-tools">CLI tools<a class="headerlink" href="#cli-tools" title="Permanent link">&para;</a></h2>
+<p><code>ecs-inspect</code> is a command-line tool to work with <a href="https://en.wikipedia.org/wiki/KKS_Power_Plant_Classification_System">ECS</a>-style references found in documents or free text.</p>
+<h3 id="extract-references-from-a-string">Extract references from a string<a class="headerlink" href="#extract-references-from-a-string" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">ecs-inspect extract &quot;check valve ASG021EC1 and pump RCV001PO&quot;
+</code></pre>
+<h3 id="extract-references-from-a-file">Extract references from a file<a class="headerlink" href="#extract-references-from-a-file" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">ecs-inspect extract-file report.txt
+</code></pre>
+<h3 id="validate-a-reference">Validate a reference<a class="headerlink" href="#validate-a-reference" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">ecs-inspect validate ASG021EC1
+</code></pre>
+<pre><code class="language-text">Query: ASG021EC1
+Normalized: ASG021EC1
+Exact Match: yes
+Candidates: 1
+Truncated: no
+...
+</code></pre>
 <h2 id="sources">Sources<a class="headerlink" href="#sources" title="Permanent link">&para;</a></h2>
 <p>All information in this library is public. Contributors should quote their public sources in the codebase when sharing information.</p>
 <h2 id="useful-resources">Useful resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h2>

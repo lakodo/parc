@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 
 from .buildings import (
@@ -29,6 +30,17 @@ from .rf import RF_FINDER_PATTERN, FunctionalReference, parse_rf, validate_rf
 ParsedReference = (
     FunctionalReference | LocationReference | FireSectorReference | ElectricalSupplyReference | GeographicReference
 )
+
+
+@dataclass(frozen=True)
+class ExtractedReference:
+    """Reference-like token extracted from free text."""
+
+    raw: str
+    canonical: str
+    start: int
+    end: int
+    kind: str | None = None
 
 
 @dataclass(frozen=True)
@@ -156,6 +168,24 @@ def _build_detected_reference(kind: str, raw: str, parsed: ParsedReference) -> D
         end=len(raw),
         parsed=parsed,
     )
+
+
+def _has_ecs_pattern_anchor(token: str) -> bool:
+    """Return ``True`` when a wildcard token starts like an ECS reference.
+
+    We intentionally require an early trigram anchor before preserving a ``*``
+    pattern as extractable text. This keeps broad patterns such as ``0*PO``
+    from being treated as meaningful ECS references while still accepting
+    patterns like ``RCV*`` or ``1HRA*``.
+    """
+
+    prefix = token.split("*", 1)[0].split("?", 1)[0]
+    if not prefix:
+        return False
+
+    if len(prefix) >= 3 and prefix[:3].isalpha():
+        return True
+    return len(prefix) >= 4 and prefix[0].isdigit() and prefix[1:4].isalpha()
 
 
 def _iter_pattern_candidates(
@@ -323,6 +353,77 @@ def analyze_text(text: str) -> list[DetectedReference]:
             )
 
     return sorted(detections, key=lambda item: (item.start, item.end, item.kind))
+
+
+EXTRACT_TOKEN_PATTERN = re.compile(r"(?P<token>[A-Z0-9?*-]{4,})")
+
+
+def extract_references(text: str) -> list[ExtractedReference]:
+    """Extract canonical ECS references from free text.
+
+    This extractor is intentionally conservative: it accepts exact references,
+    plus obvious normalizations such as a missing trailing ``-`` when the
+    completed form becomes an exact ECS reference.
+    """
+
+    detections: list[ExtractedReference] = []
+
+    for match in EXTRACT_TOKEN_PATTERN.finditer(text.upper()):
+        raw = text[match.start("token") : match.end("token")]
+        token = raw.strip().upper()
+
+        detection: DetectedReference | None = None
+        try:
+            detection = parse_reference(token)
+        except ValueError:
+            if not token.endswith("-"):
+                try:
+                    detection = parse_reference(f"{token}-")
+                except ValueError:
+                    detection = None
+
+        if detection is None and "*" in token and _has_ecs_pattern_anchor(token):
+            detections.append(
+                ExtractedReference(
+                    raw=raw,
+                    canonical=token,
+                    start=match.start("token"),
+                    end=match.end("token"),
+                    kind="pattern",
+                )
+            )
+            continue
+
+        if detection is None and "?" in token:
+            result = validate_reference(token, limit=2)
+            if len(result.candidates) == 1:
+                detection = result.candidates[0]
+            elif result.candidates:
+                detections.append(
+                    ExtractedReference(
+                        raw=raw,
+                        canonical=token,
+                        start=match.start("token"),
+                        end=match.end("token"),
+                        kind="pattern",
+                    )
+                )
+                continue
+
+        if detection is None:
+            continue
+
+        detections.append(
+            ExtractedReference(
+                raw=raw,
+                canonical=detection.canonical,
+                start=match.start("token"),
+                end=match.end("token"),
+                kind=detection.kind,
+            )
+        )
+
+    return detections
 
 
 def _format_altitude_range(altitude_range: tuple[float, float] | None) -> str | None:

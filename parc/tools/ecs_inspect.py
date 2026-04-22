@@ -11,12 +11,10 @@ from parc.naming import ecs
 app = typer.Typer(help="Inspect ECS references in free text or files.")
 
 
-def _emit_report(source: str, text: str) -> int:
-    detections = ecs.analyze_text(text)
-    typer.echo(f"Source: {source}")
-    typer.echo(f"Detected: {len(detections)}")
-    typer.echo("")
-    typer.echo(ecs.format_report(detections))
+def _emit_extract_report(text: str) -> int:
+    detections = ecs.extract_references(text)
+    for detection in detections:
+        typer.echo(detection.canonical)
     return 0 if detections else 1
 
 
@@ -104,16 +102,16 @@ def _emit_reference_validation_report(query: str, limit: int, *, list_only: bool
     return 0
 
 
-@app.command("analyze")
-def analyze_command(text: str) -> None:
-    """Analyze a raw text passed on the command line."""
+@app.command("extract")
+def extract_command(text: str) -> None:
+    """Extract canonical ECS references from a raw text."""
 
-    raise typer.Exit(_emit_report("inline text", text))
+    raise typer.Exit(_emit_extract_report(text))
 
 
-@app.command("analyze-file")
-def analyze_file_command(path: Path) -> None:
-    """Analyze a text file from disk."""
+@app.command("extract-file")
+def extract_file_command(path: Path) -> None:
+    """Extract canonical ECS references from a text file."""
 
     if not path.exists():
         typer.secho(f"File not found: {path}", err=True, fg=typer.colors.RED)
@@ -123,7 +121,7 @@ def analyze_file_command(path: Path) -> None:
         raise typer.Exit(2)
 
     text = path.read_text(encoding="utf-8")
-    raise typer.Exit(_emit_report(str(path), text))
+    raise typer.Exit(_emit_extract_report(text))
 
 
 @app.command("validate")

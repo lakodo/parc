@@ -7,45 +7,56 @@ from parc.tools.ecs_inspect import app
 runner = CliRunner()
 
 
-def test_analyze_command() -> None:
-    result = runner.invoke(app, ["analyze", "foo 1EAS1003VA- bar 1HLD0317ZL- baz"])
+def test_extract_command_returns_canonical_matches() -> None:
+    result = runner.invoke(app, ["extract", "foo 1EAS1003VA- bar HRA0503ZL baz"])
 
     assert result.exit_code == 0
-    assert "Detected: 2" in result.stdout
-    assert "type: rf" in result.stdout
-    assert "type: location" in result.stdout
-    assert "system_label: Aspersion - recirculation de l'aspersion" in result.stdout
-    assert "building_label: Bâtiments électriques et des auxiliaires de sauvegarde" in result.stdout
+    assert result.stdout.splitlines() == ["1EAS1003VA-", "HRA0503ZL-"]
 
 
-def test_analyze_compact_command() -> None:
-    result = runner.invoke(app, ["analyze", "... RCP001PO- ... RCC001PO- ..."])
+def test_extract_command_ignores_ambiguous_non_exact_candidates() -> None:
+    result = runner.invoke(app, ["extract", "... RCP001PO ... RCC001PO ..."])
 
     assert result.exit_code == 0
-    assert "Detected: 1" in result.stdout
-    assert "canonical: RCP001PO-" in result.stdout
-    assert "system_label: Circuit primaire" in result.stdout
-    assert "decomposition:" in result.stdout
-    assert "system_segment: RCP -> Circuit primaire" in result.stdout
-    assert "system_letter_1: R -> Réacteur" in result.stdout
-    assert "system_letters_2_3: CP -> Partie spécifique du trigramme système" in result.stdout
-    assert "identification_digits_2_3: 01 -> Ordre 1" in result.stdout
-    assert "material_bigram: PO -> Pompe" in result.stdout
-    assert "RCC001PO-" not in result.stdout
+    assert result.stdout.splitlines() == ["RCP001PO-"]
 
 
-def test_analyze_file_command(tmp_path: Path) -> None:
+def test_extract_command_accepts_unique_wildcard_candidates() -> None:
+    result = runner.invoke(app, ["extract", "... HRA0503ZL? ..."])
+
+    assert result.exit_code == 0
+    assert result.stdout.splitlines() == ["HRA0503ZL-"]
+
+
+def test_extract_command_keeps_ambiguous_wildcard_candidates_as_patterns() -> None:
+    result = runner.invoke(app, ["extract", "... ASG00?PO ..."])
+
+    assert result.exit_code == 0
+    assert result.stdout.splitlines() == ["ASG00?PO"]
+
+
+def test_extract_command_keeps_large_wildcard_patterns() -> None:
+    result = runner.invoke(app, ["extract", "je veux travailler sur RCV*"])
+
+    assert result.exit_code == 0
+    assert result.stdout.splitlines() == ["RCV*"]
+
+
+def test_extract_command_handles_mixed_exact_and_broad_patterns_quickly() -> None:
+    result = runner.invoke(app, ["extract", "I'm looking for something about HDM0220PBA0025 et BKI00?PO- et 0*PO"])
+
+    assert result.exit_code == 0
+    assert result.stdout.splitlines() == ["HDM0220PBA0025", "BKI00?PO-"]
+
+
+def test_extract_file_command(tmp_path: Path) -> None:
     path = tmp_path / "sample.txt"
-    path.write_text("1LHA0824JC- and 1HDM0220PBA0025", encoding="utf-8")
+    path.write_text("LHA0824JC and HLA0732CDF", encoding="utf-8")
 
-    result = runner.invoke(app, ["analyze-file", str(path)])
+    result = runner.invoke(app, ["extract-file", str(path)])
 
     assert result.exit_code == 0
-    assert "Detected: 2" in result.stdout
-    assert "type: electrical-supply" in result.stdout
-    assert "type: rg" in result.stdout
-    assert "support_kind: tableau" in result.stdout
-    assert "structure_meanings: Poteau, Béton, Ancrage à sceller (Halfen)" in result.stdout
+    assert result.stdout.splitlines() == ["LHA0824JC-", "HLA0732CDF"]
 
 
 def test_validate_command_rf_fallback() -> None:
@@ -69,7 +80,7 @@ def test_validate_list_only_command_rf_fallback() -> None:
     assert result.stdout.splitlines() == ["ASG000PO-", "ASG001PO-", "ASG002PO-"]
 
 
-def test_validate_reference_command_on_exact_location() -> None:
+def test_validate_command_on_exact_location() -> None:
     result = runner.invoke(app, ["validate", "1HRA0503ZL-"])
 
     assert result.exit_code == 0
@@ -79,7 +90,7 @@ def test_validate_reference_command_on_exact_location() -> None:
     assert "local_kind_label: Local (pièce)" in result.stdout
 
 
-def test_validate_reference_command_on_exact_location_without_tranche() -> None:
+def test_validate_command_on_exact_location_without_tranche() -> None:
     result = runner.invoke(app, ["validate", "HRA0503ZL-"])
 
     assert result.exit_code == 0
@@ -89,14 +100,7 @@ def test_validate_reference_command_on_exact_location_without_tranche() -> None:
     assert "tranche_segment: <absent> -> Tranche non précisée" in result.stdout
 
 
-def test_validate_reference_command_rf_fallback_and_list_only() -> None:
-    result = runner.invoke(app, ["validate", "ASG00?PO", "--limit", "3", "--list-only"])
-
-    assert result.exit_code == 0
-    assert result.stdout.splitlines() == ["ASG000PO-", "ASG001PO-", "ASG002PO-"]
-
-
-def test_validate_reference_command_with_location_wildcard() -> None:
+def test_validate_command_with_location_wildcard() -> None:
     result = runner.invoke(app, ["validate", "1HRA0503ZL?"])
 
     assert result.exit_code == 0
@@ -106,7 +110,7 @@ def test_validate_reference_command_with_location_wildcard() -> None:
     assert "canonical: 1HRA0503ZL-" in result.stdout
 
 
-def test_validate_reference_command_with_location_wildcard_without_tranche() -> None:
+def test_validate_command_with_location_wildcard_without_tranche() -> None:
     result = runner.invoke(app, ["validate", "HRA0503ZL?"])
 
     assert result.exit_code == 0
@@ -115,14 +119,14 @@ def test_validate_reference_command_with_location_wildcard_without_tranche() -> 
     assert "canonical: HRA0503ZL-" in result.stdout
 
 
-def test_validate_reference_command_with_location_wildcard_list_only() -> None:
+def test_validate_command_with_location_wildcard_list_only() -> None:
     result = runner.invoke(app, ["validate", "1HRA0503ZL?", "--list-only"])
 
     assert result.exit_code == 0
     assert result.stdout.splitlines() == ["1HRA0503ZL-"]
 
 
-def test_validate_reference_command_with_location_wildcard_without_tranche_list_only() -> None:
+def test_validate_command_with_location_wildcard_without_tranche_list_only() -> None:
     result = runner.invoke(app, ["validate", "HRA0503ZL?", "--list-only"])
 
     assert result.exit_code == 0

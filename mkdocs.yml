@@ -10,6 +10,7 @@ copyright: Maintained by <a href="https://9h.gg">Joris GUERRY</a>.
 nav:
   - Home: index.md
   - Modules: modules.md
+  - Tools: tools.md
 plugins:
   - search
   - mkdocstrings:

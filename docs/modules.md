@@ -1,9 +1,20 @@
+# Modules
+
 ::: parc
 ::: parc.configs
 ::: parc.constants
 ::: parc.databases
 ::: parc.grids
 ::: parc.naming
+::: parc.naming.ecs
+::: parc.naming.ecs.analyzer
+::: parc.naming.ecs.buildings
+::: parc.naming.ecs.characteristics
+::: parc.naming.ecs.ecs
+::: parc.naming.ecs.geographic
+::: parc.naming.ecs.matching
+::: parc.naming.ecs.materials
+::: parc.naming.ecs.rf
 ::: parc.sites
 ::: parc.technologies
 ::: parc.types

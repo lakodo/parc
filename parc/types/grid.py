@@ -1,5 +1,3 @@
-from typing import Optional
-
 from .site import Site
 
 
@@ -9,7 +7,7 @@ class Grid:
     sites: list[Site]
     name: str
 
-    def __init__(self, *, name: str = "grid", sites: Optional[list[Site]] = None):
+    def __init__(self, *, name: str = "grid", sites: list[Site] | None = None):
         if sites is None:
             sites = []
         self.name = name

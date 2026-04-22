@@ -1,5 +1,3 @@
-from typing import Optional, Union
-
 from parc.technologies.nuc import NuclearUnit
 from parc.types.unit import MetaUnit, Unit
 
@@ -15,7 +13,7 @@ def _is_of_power(unit: Unit, power: int) -> bool:
     return False
 
 
-def _is_of_design(unit: Unit, design: Union[FrenchNuclearUnitDesign, list[FrenchNuclearUnitDesign]]) -> bool:
+def _is_of_design(unit: Unit, design: FrenchNuclearUnitDesign | list[FrenchNuclearUnitDesign]) -> bool:
     """
     Private method of this module to check if a unit is of a specific design
     """
@@ -43,7 +41,7 @@ class MetaFrenchNuclearUnit(MetaUnit):
     def get_CP0(cls) -> list[Unit]:
         return cls.list_all(lambda u: _is_of_design(u, FrenchNuclearUnitDesign.CP0))
 
-    def get_of_design(cls, design: Union[FrenchNuclearUnitDesign, list[FrenchNuclearUnitDesign]]) -> list[Unit]:
+    def get_of_design(cls, design: FrenchNuclearUnitDesign | list[FrenchNuclearUnitDesign]) -> list[Unit]:
         return cls.list_all(lambda u: _is_of_design(u, design))
 
 
@@ -57,7 +55,7 @@ class FrenchNuclearUnit(NuclearUnit, metaclass=MetaFrenchNuclearUnit):
         design: FrenchNuclearUnitDesign,
         name: str,
         electricity_producer: bool = True,
-        power: Optional[int] = None,
+        power: int | None = None,
     ):
         super().__init__(name=name, electricity_producer=electricity_producer)
         self.design = design

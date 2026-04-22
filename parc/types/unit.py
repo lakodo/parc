@@ -1,4 +1,4 @@
-from typing import Callable
+from collections.abc import Callable
 
 from parc.constants import UnitTechnology
 from parc.types.errors import UniqueUnitError

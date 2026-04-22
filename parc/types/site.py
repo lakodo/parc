@@ -1,5 +1,3 @@
-from typing import Optional
-
 from .unit import Unit
 
 
@@ -9,10 +7,10 @@ class Site:
     """
 
     name: str
-    name_full: Optional[str]
+    name_full: str | None
     units: list[Unit]
 
-    def __init__(self, *, name: str, name_full: Optional[str] = None, units: list[Unit]):
+    def __init__(self, *, name: str, name_full: str | None = None, units: list[Unit]):
         self.name = name
         self.name_full = name_full
         self.units = units

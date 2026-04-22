@@ -228,7 +228,9 @@ def _pattern_candidates_for_kind(
     charsets: tuple[tuple[str, ...], ...],
     optional_charsets: tuple[tuple[str, ...], ...] = (),
 ):
-    for candidate in _iter_pattern_candidates(query, prefixes=prefixes, charsets=charsets, optional_charsets=optional_charsets):
+    for candidate in _iter_pattern_candidates(
+        query, prefixes=prefixes, charsets=charsets, optional_charsets=optional_charsets
+    ):
         if not proposal_matches_candidate(query, candidate):
             continue
         try:
@@ -579,7 +581,12 @@ def _append_fire_breakdown(lines: list[str], parsed: FireSectorReference) -> Non
         _format_altitude_range(parsed.identification.altitude_range),
     )
     _append_detail(lines, "    sector_digits", parsed.identification.sequence, f"Repère secteur {parsed.sector_number}")
-    _append_detail(lines, "    suffix_segment", f"{parsed.kind}F{parsed.criterion}", f"{parsed.kind_label}, critère {parsed.criterion_label}")
+    _append_detail(
+        lines,
+        "    suffix_segment",
+        f"{parsed.kind}F{parsed.criterion}",
+        f"{parsed.kind_label}, critère {parsed.criterion_label}",
+    )
     _append_detail(lines, "    suffix_char_1", parsed.kind, parsed.kind_label)
     _append_detail(lines, "    suffix_char_2", "F", "Marqueur incendie / feu")
     _append_detail(lines, "    suffix_char_3", parsed.criterion, parsed.criterion_label)
@@ -623,16 +630,24 @@ def _append_rg_breakdown(lines: list[str], parsed: GeographicReference) -> None:
     _append_detail(lines, "    order_digits", parsed.identification.order, f"Ordre {parsed.identification.order}")
     _append_detail(lines, "    structure_segment", parsed.structure, parsed.structure_meanings)
     if parsed.structure[0] == "C":
-        _append_detail(lines, "    structure_char_1", parsed.structure[0], STRUCTURE_ELEMENT_CODES.get(parsed.structure[0]))
+        _append_detail(
+            lines, "    structure_char_1", parsed.structure[0], STRUCTURE_ELEMENT_CODES.get(parsed.structure[0])
+        )
         _append_detail(lines, "    structure_char_2", parsed.structure[1], f"Voie électrique {parsed.structure[1]}")
         _append_detail(lines, "    structure_char_3", parsed.structure[2], f"Tablette {parsed.structure[2]}")
     else:
-        _append_detail(lines, "    structure_char_1", parsed.structure[0], STRUCTURE_ELEMENT_CODES.get(parsed.structure[0]))
-        _append_detail(lines, "    structure_char_2", parsed.structure[1], STRUCTURE_CHARACTERISTIC_CODES.get(parsed.structure[1]))
+        _append_detail(
+            lines, "    structure_char_1", parsed.structure[0], STRUCTURE_ELEMENT_CODES.get(parsed.structure[0])
+        )
+        _append_detail(
+            lines, "    structure_char_2", parsed.structure[1], STRUCTURE_CHARACTERISTIC_CODES.get(parsed.structure[1])
+        )
         if parsed.structure[2] == "-":
             _append_detail(lines, "    structure_char_3", parsed.structure[2], "Pas de composant précisé")
         else:
-            _append_detail(lines, "    structure_char_3", parsed.structure[2], STRUCTURE_COMPONENT_CODES.get(parsed.structure[2]))
+            _append_detail(
+                lines, "    structure_char_3", parsed.structure[2], STRUCTURE_COMPONENT_CODES.get(parsed.structure[2])
+            )
     if parsed.extension:
         _append_detail(
             lines,

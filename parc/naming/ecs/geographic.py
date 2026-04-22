@@ -110,7 +110,9 @@ def is_rg(value: str) -> bool:
     return True
 
 
-def build_rg_regex(*, tranche: str | None = None, building: str | None = None, structure: str | None = None) -> re.Pattern[str]:
+def build_rg_regex(
+    *, tranche: str | None = None, building: str | None = None, structure: str | None = None
+) -> re.Pattern[str]:
     """Build a regex for geographic references."""
 
     pattern = (

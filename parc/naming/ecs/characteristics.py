@@ -15,12 +15,7 @@ from .buildings import (
 )
 from .ecs import describe_ecs_code, normalize_ecs_code
 
-LOCATION_REGEX = (
-    r"(?P<tranche>[0-9])?"
-    r"(?P<building>H[A-Z]{2})"
-    r"(?P<identification>[0-9]{4})"
-    r"Z(?P<kind>[ACLM])-"
-)
+LOCATION_REGEX = r"(?P<tranche>[0-9])?" r"(?P<building>H[A-Z]{2})" r"(?P<identification>[0-9]{4})" r"Z(?P<kind>[ACLM])-"
 LOCATION_PATTERN = re.compile(f"^{LOCATION_REGEX}$")
 LOCATION_FINDER_PATTERN = re.compile(rf"(?<![A-Z0-9])(?P<value>{LOCATION_REGEX})(?![A-Z0-9])")
 
@@ -33,16 +28,9 @@ FIRE_REGEX = (
 FIRE_PATTERN = re.compile(f"^{FIRE_REGEX}$")
 FIRE_FINDER_PATTERN = re.compile(rf"(?<![A-Z0-9])(?P<value>{FIRE_REGEX})(?![A-Z0-9])")
 
-ELECTRICAL_SUPPLY_REGEX = (
-    r"(?P<tranche>[0-9])?"
-    r"(?P<system>L[A-Z]{2})"
-    r"(?P<slot>[0-9][A-Z0-9][A-Z0-9][0-9])"
-    r"JC-"
-)
+ELECTRICAL_SUPPLY_REGEX = r"(?P<tranche>[0-9])?" r"(?P<system>L[A-Z]{2})" r"(?P<slot>[0-9][A-Z0-9][A-Z0-9][0-9])" r"JC-"
 ELECTRICAL_SUPPLY_PATTERN = re.compile(f"^{ELECTRICAL_SUPPLY_REGEX}$")
-ELECTRICAL_SUPPLY_FINDER_PATTERN = re.compile(
-    rf"(?<![A-Z0-9])(?P<value>{ELECTRICAL_SUPPLY_REGEX})(?![A-Z0-9])"
-)
+ELECTRICAL_SUPPLY_FINDER_PATTERN = re.compile(rf"(?<![A-Z0-9])(?P<value>{ELECTRICAL_SUPPLY_REGEX})(?![A-Z0-9])")
 
 
 def normalize_characteristic(value: str) -> str:
@@ -234,7 +222,9 @@ def parse_electrical_supply_reference(value: str) -> ElectricalSupplyReference:
     )
 
 
-def build_location_regex(*, tranche: str | None = None, building: str | None = None, local_kind: str | None = None) -> re.Pattern[str]:
+def build_location_regex(
+    *, tranche: str | None = None, building: str | None = None, local_kind: str | None = None
+) -> re.Pattern[str]:
     """Build a regex for localisation characteristics."""
 
     pattern = (
@@ -264,9 +254,7 @@ def build_fire_sector_regex(
     return re.compile(f"^{pattern}$")
 
 
-def build_electrical_supply_regex(
-    *, tranche: str | None = None, system: str | None = None
-) -> re.Pattern[str]:
+def build_electrical_supply_regex(*, tranche: str | None = None, system: str | None = None) -> re.Pattern[str]:
     """Build a regex for electrical supply characteristics."""
 
     pattern = (

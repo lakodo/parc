@@ -11,7 +11,7 @@ check: ## Run code quality tools.
 	@echo "🚀 Linting code: Running pre-commit"
 	@uv run pre-commit run -a
 	@echo "🚀 Static type checking: Running mypy"
-	@uv run mypy
+	@uv run mypy parc tests
 	@echo "🚀 Checking for obsolete dependencies: Running deptry"
 	@uv run deptry .
 

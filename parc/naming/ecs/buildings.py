@@ -5,133 +5,115 @@ from __future__ import annotations
 from dataclasses import dataclass
 from types import MappingProxyType
 
-BUILDING_CODE_LABELS = MappingProxyType(
-    {
-        "A": "Bâtiments et installations de site de l'aménagement",
-        "B": "Bâtiment de site de l'exploitation",
-        "C": "Rejets, réfrigérants",
-        "D": "Bâtiments diesel",
-        "E": "Poste d'interconnexion",
-        "F": "Bâtiments à fioul / bâtiment électrique non classé",
-        "G": "Galeries",
-        "H": "Bâtiments d'entreposage et stockage provisoire G.V. usés",
-        "I": "Chauffage central (production eau chaude)",
-        "J": "Plate-forme transformateurs auxiliaires",
-        "K": "Bâtiment combustible",
-        "L": "Bâtiments électriques et des auxiliaires de sauvegarde",
-        "M": "Salle des machines",
-        "N": "Bâtiments des auxiliaires nucléaires",
-        "O": "Bâtiment de stockage d'eau",
-        "P": "Station de pompage et de filtration",
-        "Q": "Bâtiment de traitement des effluents",
-        "R": "Bâtiment réacteur",
-        "S": "Environnement, site",
-        "T": "Plate-forme transformateurs principaux",
-        "U": "Protection site, poste d'accès principal",
-        "V": "Bâtiments des auxiliaires généraux",
-        "W": "Bâtiments périphériques des bâtiments réacteurs et bâtiments d'exploitation",
-        "X": "Aire de stockage des effluents",
-        "Y": "Bâtiment déminéralisation",
-        "Z": "Bâtiment de stockage de gaz",
-    }
-)
-SITE_BUILDING_SUBFUNCTIONS = MappingProxyType(
-    {
-        "0": "Chauffage, climatisation",
-        "1": "Eclairage normal et de secours",
-        "2": "Distribution électrique normale",
-        "3": "Distribution électrique secourue",
-        "4": "Détection incendie",
-        "5": "Distribution eau incendie",
-        "6": "Distribution eau potable",
-    }
-)
-LOCAL_CODE_LABELS = MappingProxyType(
-    {
-        "A": "Zone de montage",
-        "C": "Zone de circulation",
-        "L": "Local (pièce)",
-        "M": "Zone de manutention",
-    }
-)
+BUILDING_CODE_LABELS = MappingProxyType({
+    "A": "Bâtiments et installations de site de l'aménagement",
+    "B": "Bâtiment de site de l'exploitation",
+    "C": "Rejets, réfrigérants",
+    "D": "Bâtiments diesel",
+    "E": "Poste d'interconnexion",
+    "F": "Bâtiments à fioul / bâtiment électrique non classé",
+    "G": "Galeries",
+    "H": "Bâtiments d'entreposage et stockage provisoire G.V. usés",
+    "I": "Chauffage central (production eau chaude)",
+    "J": "Plate-forme transformateurs auxiliaires",
+    "K": "Bâtiment combustible",
+    "L": "Bâtiments électriques et des auxiliaires de sauvegarde",
+    "M": "Salle des machines",
+    "N": "Bâtiments des auxiliaires nucléaires",
+    "O": "Bâtiment de stockage d'eau",
+    "P": "Station de pompage et de filtration",
+    "Q": "Bâtiment de traitement des effluents",
+    "R": "Bâtiment réacteur",
+    "S": "Environnement, site",
+    "T": "Plate-forme transformateurs principaux",
+    "U": "Protection site, poste d'accès principal",
+    "V": "Bâtiments des auxiliaires généraux",
+    "W": "Bâtiments périphériques des bâtiments réacteurs et bâtiments d'exploitation",
+    "X": "Aire de stockage des effluents",
+    "Y": "Bâtiment déminéralisation",
+    "Z": "Bâtiment de stockage de gaz",
+})
+SITE_BUILDING_SUBFUNCTIONS = MappingProxyType({
+    "0": "Chauffage, climatisation",
+    "1": "Eclairage normal et de secours",
+    "2": "Distribution électrique normale",
+    "3": "Distribution électrique secourue",
+    "4": "Détection incendie",
+    "5": "Distribution eau incendie",
+    "6": "Distribution eau potable",
+})
+LOCAL_CODE_LABELS = MappingProxyType({
+    "A": "Zone de montage",
+    "C": "Zone de circulation",
+    "L": "Local (pièce)",
+    "M": "Zone de manutention",
+})
 FIRE_KIND_LABELS = MappingProxyType({"S": "Secteur", "Z": "Zone"})
-FIRE_CRITERION_LABELS = MappingProxyType(
-    {
-        "C": "Confinement de matière radioactive",
-        "I": "Limitation et indisponibilité",
-        "S": "Sûreté",
-    }
-)
+FIRE_CRITERION_LABELS = MappingProxyType({
+    "C": "Confinement de matière radioactive",
+    "I": "Limitation et indisponibilité",
+    "S": "Sûreté",
+})
 FIRE_CODE_ORDER = ("ZFI", "SFI", "ZFS", "SFS", "SFC")
-STRUCTURE_ELEMENT_CODES = MappingProxyType(
-    {
-        "B": "Echelle",
-        "C": "Chemin de câbles",
-        "D": "Dalle",
-        "E": "Cage d'escalier et d'ascenseur",
-        "F": "Fondation, semelle",
-        "J": "Joint",
-        "L": "Levée",
-        "M": "Massif",
-        "N": "Nervure, poutre, longrine",
-        "P": "Poteau",
-        "V": "Voile",
-        "X": "Faux plafond",
-    }
-)
-STRUCTURE_CHARACTERISTIC_CODES = MappingProxyType(
-    {
-        "B": "Béton",
-        "M": "Métal",
-        "V": "Vide",
-    }
-)
-STRUCTURE_COMPONENT_CODES = MappingProxyType(
-    {
-        "A": "Ancrage à sceller (Halfen)",
-        "B": "Caniveaux",
-        "C": "Cadre à sceller",
-        "D": "Porte",
-        "E": "Fer plat",
-        "F": "Fourreau / chatière",
-        "G": "Garde corps",
-        "K": "Carottage",
-        "L": "Palier / seuil",
-        "N": "Portillon",
-        "P": "Platine à sceller",
-        "Q": "Console (cornière, ...)",
-        "R": "Réservation",
-        "S": "Divers à sceller",
-        "T": "Trémie",
-        "U": "Puisard",
-        "V": "Volée",
-        "W": "Supportage",
-        "Y": "Pylône",
-        "Z": "Ecran thermique pour les chemins de câble",
-    }
-)
-TREMIE_EXTENSION_TYPES = MappingProxyType(
-    {
-        "D": "Trémie destinée à une porte",
-        "E": "Trémie électrique",
-        "F": "Trémie équipée (chatière, hublot, fenêtre...)",
-        "K": "Trémie destinée à commande de vanne déportée",
-        "L": "Trémie destinée à un passage libre / escalier / circulation",
-        "M": "Trémie de manutention",
-        "R": "Trémie de réserve",
-        "T": "Trémie de tuyauterie",
-        "V": "Trémie de ventilation",
-        "W": "Trémie de transfert d'air",
-        "X": "Trémie à destination multiple",
-        "Z": "Trémie SAS du BR",
-    }
-)
-JOINT_AND_CANIVEAU_COVERS = MappingProxyType(
-    {
-        "CB": "Couvre joint ou couvre caniveau béton",
-        "CM": "Couvre joint ou couvre caniveau métallique",
-    }
-)
+STRUCTURE_ELEMENT_CODES = MappingProxyType({
+    "B": "Echelle",
+    "C": "Chemin de câbles",
+    "D": "Dalle",
+    "E": "Cage d'escalier et d'ascenseur",
+    "F": "Fondation, semelle",
+    "J": "Joint",
+    "L": "Levée",
+    "M": "Massif",
+    "N": "Nervure, poutre, longrine",
+    "P": "Poteau",
+    "V": "Voile",
+    "X": "Faux plafond",
+})
+STRUCTURE_CHARACTERISTIC_CODES = MappingProxyType({
+    "B": "Béton",
+    "M": "Métal",
+    "V": "Vide",
+})
+STRUCTURE_COMPONENT_CODES = MappingProxyType({
+    "A": "Ancrage à sceller (Halfen)",
+    "B": "Caniveaux",
+    "C": "Cadre à sceller",
+    "D": "Porte",
+    "E": "Fer plat",
+    "F": "Fourreau / chatière",
+    "G": "Garde corps",
+    "K": "Carottage",
+    "L": "Palier / seuil",
+    "N": "Portillon",
+    "P": "Platine à sceller",
+    "Q": "Console (cornière, ...)",
+    "R": "Réservation",
+    "S": "Divers à sceller",
+    "T": "Trémie",
+    "U": "Puisard",
+    "V": "Volée",
+    "W": "Supportage",
+    "Y": "Pylône",
+    "Z": "Ecran thermique pour les chemins de câble",
+})
+TREMIE_EXTENSION_TYPES = MappingProxyType({
+    "D": "Trémie destinée à une porte",
+    "E": "Trémie électrique",
+    "F": "Trémie équipée (chatière, hublot, fenêtre...)",
+    "K": "Trémie destinée à commande de vanne déportée",
+    "L": "Trémie destinée à un passage libre / escalier / circulation",
+    "M": "Trémie de manutention",
+    "R": "Trémie de réserve",
+    "T": "Trémie de tuyauterie",
+    "V": "Trémie de ventilation",
+    "W": "Trémie de transfert d'air",
+    "X": "Trémie à destination multiple",
+    "Z": "Trémie SAS du BR",
+})
+JOINT_AND_CANIVEAU_COVERS = MappingProxyType({
+    "CB": "Couvre joint ou couvre caniveau béton",
+    "CM": "Couvre joint ou couvre caniveau métallique",
+})
 
 
 @dataclass(frozen=True)

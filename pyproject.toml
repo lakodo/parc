@@ -6,7 +6,7 @@ authors = [{ name = "Joris GUERRY", email = "j@9h.gg" }]
 readme = "README.md"
 keywords = ['python']
 requires-python = ">=3.10,<4.0"
-dependencies = ["pydantic>=2.9.2", "typer>=0.17.4"]
+dependencies = [ "typer>=0.17.4"]
 
 [project.scripts]
 ecs-inspect = "parc.tools.ecs_inspect:app"
@@ -30,6 +30,7 @@ dev = [
     "mkdocs-material>=9.7.1",
     "mkdocstrings[python]>=1.0.2",
     "jean-michel",
+    "mypy>=1.20.2",
 ]
 
 [build-system]

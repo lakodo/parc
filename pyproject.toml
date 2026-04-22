@@ -29,7 +29,7 @@ dev = [
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.7.1",
     "mkdocstrings[python]>=1.0.2",
-    "jean-michel",
+    "griffe-typingdoc>=0.2.7",
     "mypy>=1.20.2",
 ]
 
@@ -106,5 +106,5 @@ skip_empty = true
 branch = true
 source = ["parc"]
 
-[tool.uv.sources]
-jean-michel = { path = "../jean-michel", editable = true }
+# [tool.uv.sources]
+# jean-michel = { path = "../jean-michel", editable = true }

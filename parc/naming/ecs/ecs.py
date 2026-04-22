@@ -197,7 +197,7 @@ ELEMENTARY_SYSTEM_CODES = MappingProxyType(
         "GEV": "Evacuation d'énergie (transfo soutirage inclus)",
         "GEX": "Excitation et régulation alternateur",
         "GFR": "Fluide de régulation turbine",
-        "GGR": "Graissage - soulèvement – virage",
+        "GGR": "Graissage - soulèvement - virage",
         "GHE": "Huile d'étanchéité alternateur",
         "GHP": "Contournement turbine HP",
         "GME": "Eléments mesure turbine",
@@ -210,7 +210,7 @@ ELEMENTARY_SYSTEM_CODES = MappingProxyType(
         "GSS": "Sécheurs surchauffeurs",
         "GST": "Eau stator",
         "GTH": "Traitement d'huile",
-        "GTR": "Téléréglage - télémesures – comptage",
+        "GTR": "Téléréglage - télémesures - comptage",
         "GZA": "Admission d'air de la turbine - système anti-givrage",
         "GZD": "Système de démarrage turbine",
         "GZE": "Echappement turbine",
@@ -253,7 +253,7 @@ ELEMENTARY_SYSTEM_CODES = MappingProxyType(
         "KRC": "Contrôle de contamination corporelle et dosimétrique",
         "KRG": "Régulation générale",
         "KRH": "Détection hydrogène îlot nucléaire",
-        "KRS": "Contrôle de pollution (radioprotection - météorologie – pollution)",
+        "KRS": "Contrôle de pollution (radioprotection - météorologie - pollution)",
         "KRT": "Mesure de santé (radioprotection tranche)",
         "KSA": "Traitement des alarmes",
         "KSC": "Instrumentation salle de Commande",
@@ -350,7 +350,7 @@ ELEMENTARY_SYSTEM_CODES = MappingProxyType(
         "SKZ": "Stockage des gaz (H2, O2, N2, CO2 et gaz rares)",
         "SMW": "Dégelage des wagons et engins de manutention",
         "SNE": "Neutralisation des effluents de site",
-        "SNL": "Nettoyage – lançage GV",
+        "SNL": "Nettoyage - lançage GV",
         "SNV": "Nettoyage par le vide de la salle des machines",
         "SRI": "Réfrigération intermédiaire - circuits conventionnels (NORIA)",
         "STE": "Traçage électrique",
@@ -393,4 +393,3 @@ def describe_ecs_code(code: str) -> str | None:
     """Return the ECS label associated with ``code`` if it exists."""
 
     return KNOWN_ECS_CODES.get(normalize_ecs_code(code))
-

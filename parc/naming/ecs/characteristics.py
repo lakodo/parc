@@ -16,7 +16,7 @@ from .buildings import (
 from .ecs import describe_ecs_code, normalize_ecs_code
 
 LOCATION_REGEX = (
-    r"(?P<tranche>[0-9])"
+    r"(?P<tranche>[0-9])?"
     r"(?P<building>H[A-Z]{2})"
     r"(?P<identification>[0-9]{4})"
     r"Z(?P<kind>[ACLM])-"
@@ -25,7 +25,7 @@ LOCATION_PATTERN = re.compile(f"^{LOCATION_REGEX}$")
 LOCATION_FINDER_PATTERN = re.compile(rf"(?<![A-Z0-9])(?P<value>{LOCATION_REGEX})(?![A-Z0-9])")
 
 FIRE_REGEX = (
-    r"(?P<tranche>[0-9])"
+    r"(?P<tranche>[0-9])?"
     r"(?P<building>H[A-Z]{2})"
     r"(?P<identification>[0-9]{4})"
     r"(?P<kind>[SZ])F(?P<criterion>[CIS])"
@@ -34,7 +34,7 @@ FIRE_PATTERN = re.compile(f"^{FIRE_REGEX}$")
 FIRE_FINDER_PATTERN = re.compile(rf"(?<![A-Z0-9])(?P<value>{FIRE_REGEX})(?![A-Z0-9])")
 
 ELECTRICAL_SUPPLY_REGEX = (
-    r"(?P<tranche>[0-9])"
+    r"(?P<tranche>[0-9])?"
     r"(?P<system>L[A-Z]{2})"
     r"(?P<slot>[0-9][A-Z0-9][A-Z0-9][0-9])"
     r"JC-"
@@ -74,14 +74,14 @@ class BuildingIdentification:
 class LocationReference:
     """ECS localisation characteristic."""
 
-    tranche: str
+    tranche: str | None
     building: str
     identification: BuildingIdentification
     local_kind: str
 
     @property
     def code(self) -> str:
-        return f"{self.tranche}{self.building}{self.identification.raw}Z{self.local_kind}-"
+        return f"{self.tranche or ''}{self.building}{self.identification.raw}Z{self.local_kind}-"
 
     @property
     def building_label(self) -> str | None:
@@ -103,7 +103,7 @@ class LocationReference:
 class FireSectorReference:
     """ECS fire sectorisation characteristic."""
 
-    tranche: str
+    tranche: str | None
     building: str
     identification: BuildingIdentification
     kind: str
@@ -111,7 +111,7 @@ class FireSectorReference:
 
     @property
     def code(self) -> str:
-        return f"{self.tranche}{self.building}{self.identification.raw}{self.kind}F{self.criterion}"
+        return f"{self.tranche or ''}{self.building}{self.identification.raw}{self.kind}F{self.criterion}"
 
     @property
     def building_label(self) -> str | None:
@@ -144,13 +144,13 @@ class FireSectorReference:
 class ElectricalSupplyReference:
     """ECS electrical supply characteristic."""
 
-    tranche: str
+    tranche: str | None
     system: str
     slot: str
 
     @property
     def code(self) -> str:
-        return f"{self.tranche}{self.system}{self.slot}JC-"
+        return f"{self.tranche or ''}{self.system}{self.slot}JC-"
 
     @property
     def system_label(self) -> str | None:
@@ -238,7 +238,7 @@ def build_location_regex(*, tranche: str | None = None, building: str | None = N
     """Build a regex for localisation characteristics."""
 
     pattern = (
-        (re.escape(str(tranche)) if tranche is not None else r"[0-9]")
+        (re.escape(str(tranche)) if tranche is not None else r"[0-9]?")
         + (re.escape(normalize_characteristic(building)) if building is not None else r"H[A-Z]{2}")
         + r"[0-9]{4}"
         + "Z"
@@ -254,7 +254,7 @@ def build_fire_sector_regex(
     """Build a regex for fire sectorisation characteristics."""
 
     pattern = (
-        (re.escape(str(tranche)) if tranche is not None else r"[0-9]")
+        (re.escape(str(tranche)) if tranche is not None else r"[0-9]?")
         + (re.escape(normalize_characteristic(building)) if building is not None else r"H[A-Z]{2}")
         + r"[0-9]{4}"
         + (re.escape(normalize_characteristic(kind)) if kind is not None else r"[SZ]")
@@ -270,7 +270,7 @@ def build_electrical_supply_regex(
     """Build a regex for electrical supply characteristics."""
 
     pattern = (
-        (re.escape(str(tranche)) if tranche is not None else r"[0-9]")
+        (re.escape(str(tranche)) if tranche is not None else r"[0-9]?")
         + (re.escape(normalize_ecs_code(system)) if system is not None else r"L[A-Z]{2}")
         + r"[0-9][A-Z0-9][A-Z0-9][0-9]JC-"
     )

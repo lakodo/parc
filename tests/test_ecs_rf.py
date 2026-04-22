@@ -16,6 +16,22 @@ def test_parse_basic_rf():
     assert str(rf) == "1EAS1003VA-"
 
 
+def test_parse_compact_rf_without_tranche():
+    rf = ecs.parse_rf("RCP001PO-")
+
+    assert rf.tranche is None
+    assert rf.system == "RCP"
+    assert rf.system_label == "Circuit primaire"
+    assert rf.identification.raw == "001"
+    assert rf.identification.sub_function is None
+    assert rf.identification.base_function == 0
+    assert rf.identification.order == 1
+    assert rf.material.code == "PO-"
+    assert str(rf) == "RCP001PO-"
+    assert ecs.is_rf("RCV001PO-")
+    assert not ecs.is_rf("RCC001PO-")
+
+
 def test_parse_state_and_extension_examples_from_pdf():
     state_rf = ecs.parse_rf("1EAS1003VA 3")
     support_rf = ecs.parse_rf("1EAS2055TY- S001")
@@ -57,6 +73,32 @@ def test_rf_build_and_regex_helpers():
 
 
 def test_find_rfs_in_text():
-    refs = ecs.find_rfs("foo 1EAS1003VA- bar 1KAC0012RXC baz")
+    refs = ecs.find_rfs("foo 1EAS1003VA- bar 1KAC0012RXC baz RCP001PO-")
 
-    assert [str(ref) for ref in refs] == ["1EAS1003VA-", "1KAC0012RXC"]
+    assert [str(ref) for ref in refs] == ["1EAS1003VA-", "1KAC0012RXC", "RCP001PO-"]
+
+
+def test_validate_exact_and_partial_rf_candidates():
+    exact = ecs.validate_rf("RCP001PO-")
+    partial = ecs.validate_rf("RCP001PO")
+
+    assert exact.is_exact_match
+    assert [str(candidate) for candidate in exact.candidates] == ["RCP001PO-"]
+
+    assert not partial.is_exact_match
+    assert partial.has_candidates
+    assert str(partial.candidates[0]) == "RCP001PO-"
+
+
+def test_validate_rf_with_minimatch_patterns():
+    broad = ecs.validate_rf("RCV*", limit=3)
+    precise = ecs.validate_rf("ASG00?PO", limit=5)
+    invalid = ecs.validate_rf("RCC*", limit=3)
+
+    assert not broad.is_exact_match
+    assert broad.has_candidates
+    assert broad.truncated
+    assert all(candidate.system == "RCV" for candidate in broad.candidates)
+
+    assert [str(candidate) for candidate in precise.candidates[:3]] == ["ASG000PO-", "ASG001PO-", "ASG002PO-"]
+    assert not invalid.has_candidates

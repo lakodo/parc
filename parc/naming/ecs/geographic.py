@@ -14,7 +14,7 @@ from .buildings import (
 )
 
 RG_REGEX = (
-    r"(?P<tranche>[0-9])"
+    r"(?P<tranche>[0-9])?"
     r"(?P<building>H[A-Z]{2})"
     r"(?P<identification>[0-9]{4})"
     r"(?P<structure>[BCDEFJLMNPVX][A-Z][A-Z0-9-])"
@@ -53,7 +53,7 @@ class GeographicIdentification:
 class GeographicReference:
     """Parsed ECS repère géographique."""
 
-    tranche: str
+    tranche: str | None
     building: str
     identification: GeographicIdentification
     structure: str
@@ -61,7 +61,7 @@ class GeographicReference:
 
     @property
     def code(self) -> str:
-        return f"{self.tranche}{self.building}{self.identification.raw}{self.structure}{self.extension}"
+        return f"{self.tranche or ''}{self.building}{self.identification.raw}{self.structure}{self.extension}"
 
     @property
     def building_label(self) -> str | None:
@@ -114,7 +114,7 @@ def build_rg_regex(*, tranche: str | None = None, building: str | None = None, s
     """Build a regex for geographic references."""
 
     pattern = (
-        (re.escape(str(tranche)) if tranche is not None else r"[0-9]")
+        (re.escape(str(tranche)) if tranche is not None else r"[0-9]?")
         + (re.escape(normalize_rg(building)) if building is not None else r"H[A-Z]{2}")
         + r"[0-9]{4}"
         + (re.escape(normalize_rg(structure)) if structure is not None else r"[A-Z]{2}[A-Z0-9-]")

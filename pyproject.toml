@@ -6,7 +6,10 @@ authors = [{ name = "Joris GUERRY", email = "j@9h.gg" }]
 readme = "README.md"
 keywords = ['python']
 requires-python = ">=3.10,<4.0"
-dependencies = ["pydantic>=2.9.2"]
+dependencies = ["pydantic>=2.9.2", "typer>=0.17.4"]
+
+[project.scripts]
+ecs-inspect = "parc.tools.ecs_inspect:app"
 
 [project.urls]
 Homepage = "https://lakodo.github.io/parc/"

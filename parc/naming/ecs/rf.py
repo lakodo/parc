@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import itertools
 import re
 from dataclasses import dataclass
 
@@ -291,6 +292,26 @@ def suggest_rf_candidates(query: str, *, limit: int = 20) -> tuple[FunctionalRef
     return tuple(candidates)
 
 
+def _zero_o_correction_variants(query: str) -> list[str]:
+    """Return variants of *query* with some ``'0'`` chars replaced by ``'O'``.
+
+    Variants are ordered from fewest to most replacements so that the minimal
+    correction is tried first.
+    """
+
+    positions = [i for i, c in enumerate(query) if c == "0"]
+    if not positions:
+        return []
+    result: list[str] = []
+    for r in range(1, len(positions) + 1):
+        for combo in itertools.combinations(range(len(positions)), r):
+            chars = list(query)
+            for idx in combo:
+                chars[positions[idx]] = "O"
+            result.append("".join(chars))
+    return result
+
+
 def validate_rf(query: str, *, limit: int = 20) -> RFValidationResult:
     """Validate or complete an RF proposal.
 
@@ -316,13 +337,37 @@ def validate_rf(query: str, *, limit: int = 20) -> RFValidationResult:
         )
 
     candidates = suggest_rf_candidates(normalized_query, limit=limit + 1)
+
+    # When the original query yields nothing, try replacing '0' with 'O' in
+    # positions where a letter was likely intended.
+    effective_query = normalized_query
+    if not candidates and "0" in normalized_query:
+        for variant in _zero_o_correction_variants(normalized_query):
+            try:
+                exact_variant = parse_rf(variant)
+            except ValueError:
+                exact_variant = None
+            if exact_variant is not None:
+                return RFValidationResult(
+                    query=query,
+                    normalized_query=variant,
+                    is_exact_match=True,
+                    candidates=(exact_variant,),
+                    truncated=False,
+                )
+            variant_candidates = suggest_rf_candidates(variant, limit=limit + 1)
+            if variant_candidates:
+                candidates = variant_candidates
+                effective_query = variant
+                break
+
     truncated = len(candidates) > limit
     if truncated:
         candidates = candidates[:limit]
 
     return RFValidationResult(
         query=query,
-        normalized_query=normalized_query,
+        normalized_query=effective_query,
         is_exact_match=False,
         candidates=candidates,
         truncated=truncated,

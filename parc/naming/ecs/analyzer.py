@@ -307,11 +307,27 @@ def validate_reference(query: str, *, limit: int = 20) -> ReferenceValidationRes
                 )
 
     rf_result = validate_rf(normalized_query, limit=limit + 1)
+    # If validate_rf applied a 0→O correction, reflect it in the normalized query.
+    effective_normalized_query = rf_result.normalized_query if rf_result.candidates else normalized_query
+
+    # Propagate an exact-match result from validate_rf (e.g. after a 0→O correction)
+    # only when no other candidate type was found first.
+    if rf_result.is_exact_match and rf_result.candidates and not candidates:
+        rf_candidate = rf_result.candidates[0]
+        detection = _build_detected_reference("rf", str(rf_candidate), rf_candidate)
+        return ReferenceValidationResult(
+            query=query,
+            normalized_query=effective_normalized_query,
+            is_exact_match=True,
+            candidates=(detection,),
+            truncated=False,
+        )
+
     for candidate in rf_result.candidates:
         if add(_build_detected_reference("rf", str(candidate), candidate)):
             return ReferenceValidationResult(
                 query=query,
-                normalized_query=normalized_query,
+                normalized_query=effective_normalized_query,
                 is_exact_match=False,
                 candidates=tuple(candidates[:limit]),
                 truncated=True,
@@ -319,7 +335,7 @@ def validate_reference(query: str, *, limit: int = 20) -> ReferenceValidationRes
 
     return ReferenceValidationResult(
         query=query,
-        normalized_query=normalized_query,
+        normalized_query=effective_normalized_query,
         is_exact_match=False,
         candidates=tuple(candidates[:limit]),
         truncated=len(candidates) > limit or rf_result.truncated,

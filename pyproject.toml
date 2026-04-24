@@ -32,6 +32,9 @@ dev = [
     "griffe-typingdoc>=0.2.7",
     "mypy>=1.20.2",
 ]
+scraping = [
+    "beautifulsoup4>=4.13.0",
+]
 
 [build-system]
 requires = ["hatchling"]

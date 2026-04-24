@@ -38,8 +38,9 @@ plugins:
             show_symbol_type_toc: true
 theme:
   name: material
-  feature:
-    tabs: true
+  features:
+    - navigation.tabs
+    - content.code.copy
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -70,3 +71,9 @@ markdown_extensions:
       permalink: true
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true

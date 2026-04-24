@@ -39,7 +39,7 @@ In order to keep this project open source all the information available in this 
 
 ## About the author
 
-I'm PhD Joris GUERRY, research engineer at EDF (Electricité de France). Check out my Linkedin profile if you want to know more: <https://linkedin.com/in/jorisguerry>
+I'm PhD Joris GUERRY, research engineer at EDF (Electricité de France) until June 2026. Check out my Linkedin profile if you want to know more: <https://linkedin.com/in/jorisguerry>
 
 ## Looking for an internship or a job in datascience/energy?
 

@@ -412,6 +412,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#use-with-uv-without-installing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use with uv without installing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -666,6 +677,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#use-with-uv-without-installing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use with uv without installing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -852,73 +874,156 @@
 <p>Install a specific branch:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>uv<span class="w"> </span>add<span class="w"> </span>git+https://github.com/lakodo/parc.git@dev
 </code></pre></div>
-<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<h3 id="inspect-a-single-unit">Inspect a single unit<a class="headerlink" href="#inspect-a-single-unit" title="Permanent link">&para;</a></h3>
+<h2 id="use-with-uv-without-installing">Use with <code>uv</code> without installing<a class="headerlink" href="#use-with-uv-without-installing" title="Permanent link">&para;</a></h2>
+<p>Run <code>ecs-inspect</code> directly from GitHub without adding anything to your environment:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Code</label><label for="__tabbed_1_2">Result</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">parc.configs.edf.sites.nuc.belleville</span><span class="w"> </span><span class="kn">import</span> <span class="n">BEL1</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">BEL1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">BEL1</span><span class="o">.</span><span class="n">power</span><span class="p">)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">BEL1</span><span class="o">.</span><span class="n">design</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>uv<span class="w"> </span>run<span class="w"> </span>--with<span class="w"> </span>git+https://github.com/lakodo/parc.git<span class="w"> </span>ecs-inspect<span class="w"> </span>extract<span class="w"> </span><span class="s2">&quot;check valve ASG021EC1 and pump RCV001PO&quot;</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bel1
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>1300
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>FrenchNuclearUnitDesign.PP4
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ASG021EC1
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>RCV001PO-
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>You can also pipe the extracted references into <code>validate</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Code</label><label for="__tabbed_2_2">Result</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uv<span class="w"> </span>run<span class="w"> </span>--with<span class="w"> </span>git+https://github.com/lakodo/parc.git<span class="w"> </span>ecs-inspect<span class="w"> </span>extract<span class="w"> </span><span class="s2">&quot;check valve ASG021EC1 and pump RCV001PO&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-I<span class="w"> </span><span class="o">{}</span><span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>--with<span class="w"> </span>git+https://github.com/lakodo/parc.git<span class="w"> </span>ecs-inspect<span class="w"> </span>validate<span class="w"> </span><span class="o">{}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Query: ASG021EC1
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Normalized: ASG021EC1
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Exact Match: yes
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Candidates: 1
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Truncated: no
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>- type: rf
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>  raw: ASG021EC1
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>  canonical: ASG021EC1
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>  span: 0-9
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>  system: ASG
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>  system_label: Alimentation auxiliaire de secours des GV
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>  identification: 021
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>  base_function: 0
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>  order: 21
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>  material: EC1
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>  material_qualifier_meanings: Enclenché
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>  decomposition:
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>    tranche_segment: &lt;absent&gt; -&gt; Tranche non précisée
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>    system_segment: ASG -&gt; Alimentation auxiliaire de secours des GV
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>    system_letter_1: A -&gt; Alimentation en eau - poste d&#39;eau
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>    system_letters_2_3: SG -&gt; Partie spécifique du trigramme système
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>    identification_segment: 021 -&gt; Format compact sans sous-fonction
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>    identification_digit_1: 0 -&gt; Fonction de base
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>    identification_digits_2_3: 21 -&gt; Ordre 21
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>    material_segment: EC1
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>    material_bigram: EC
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>    material_qualifier: 1 -&gt; Enclenché
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>Query: RCV001PO-
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>Normalized: RCV001PO-
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>Exact Match: yes
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>Candidates: 1
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>Truncated: no
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>- type: rf
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>  raw: RCV001PO-
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>  canonical: RCV001PO-
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>  span: 0-9
+<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>  system: RCV
+<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>  system_label: Contrôle chimique et volumétrique
+<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>  identification: 001
+<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>  base_function: 0
+<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>  order: 1
+<a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>  material: PO-
+<a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>  material_labels: Pompe
+<a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a>  decomposition:
+<a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>    tranche_segment: &lt;absent&gt; -&gt; Tranche non précisée
+<a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a>    system_segment: RCV -&gt; Contrôle chimique et volumétrique
+<a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a>    system_letter_1: R -&gt; Réacteur
+<a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a>    system_letters_2_3: CV -&gt; Partie spécifique du trigramme système
+<a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a>    identification_segment: 001 -&gt; Format compact sans sous-fonction
+<a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a>    identification_digit_1: 0 -&gt; Fonction de base
+<a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>    identification_digits_2_3: 01 -&gt; Ordre 1
+<a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a>    material_segment: PO-
+<a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a>    material_bigram: PO -&gt; Pompe
+<a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a>    material_qualifier: - -&gt; Qualificatif absent ou non précisé
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<h3 id="inspect-a-single-unit">Inspect a single unit<a class="headerlink" href="#inspect-a-single-unit" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Code</label><label for="__tabbed_3_2">Result</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">parc.configs.edf.sites.nuc.belleville</span><span class="w"> </span><span class="kn">import</span> <span class="n">BEL1</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">BEL1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">BEL1</span><span class="o">.</span><span class="n">power</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">BEL1</span><span class="o">.</span><span class="n">design</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>bel1
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>1300
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>FrenchNuclearUnitDesign.PP4
 </code></pre></div>
 </div>
 </div>
 </div>
 <h3 id="browse-an-entire-grid">Browse an entire grid<a class="headerlink" href="#browse-an-entire-grid" title="Permanent link">&para;</a></h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Code</label><label for="__tabbed_2_2">Result</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Code</label><label for="__tabbed_4_2">Result</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">parc.configs.edf.france</span><span class="w"> </span><span class="kn">import</span> <span class="n">FRENCH_GRID</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">parc.constants.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnitTechnology</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">nuclear_units</span> <span class="o">=</span> <span class="p">(</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">FRENCH_GRID</span><span class="o">.</span><span class="n">sites</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">site</span><span class="o">.</span><span class="n">units</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="k">if</span> <span class="n">unit</span><span class="o">.</span><span class="n">technology</span> <span class="o">==</span> <span class="n">UnitTechnology</span><span class="o">.</span><span class="n">NUCLEAR</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">)</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nuclear_units</span><span class="p">):</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="k">break</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">parc.configs.edf.france</span><span class="w"> </span><span class="kn">import</span> <span class="n">FRENCH_GRID</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">parc.constants.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnitTechnology</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">nuclear_units</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">FRENCH_GRID</span><span class="o">.</span><span class="n">sites</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">site</span><span class="o">.</span><span class="n">units</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="k">if</span> <span class="n">unit</span><span class="o">.</span><span class="n">technology</span> <span class="o">==</span> <span class="n">UnitTechnology</span><span class="o">.</span><span class="n">NUCLEAR</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="p">)</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nuclear_units</span><span class="p">):</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="k">break</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;site: &quot;Belleville-sur-Loire&quot; (2 units)&gt; -&gt; &lt;☢️ FrenchNuclearUnitDesign.PP4 (1300): bel1 &gt;
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>&lt;site: &quot;Belleville-sur-Loire&quot; (2 units)&gt; -&gt; &lt;☢️ FrenchNuclearUnitDesign.PP4 (1300): bel2 &gt;
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>&lt;site: &quot;Blayais&quot; (4 units)&gt; -&gt; &lt;☢️ FrenchNuclearUnitDesign.CP1 (900): bla1 &gt;
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>&lt;site: &quot;Blayais&quot; (4 units)&gt; -&gt; &lt;☢️ FrenchNuclearUnitDesign.CP1 (900): bla2 &gt;
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>&lt;site: &quot;Blayais&quot; (4 units)&gt; -&gt; &lt;☢️ FrenchNuclearUnitDesign.CP1 (900): bla3 &gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&lt;site: &quot;Belleville-sur-Loire&quot; (2 units)&gt; -&gt; &lt;☢️ FrenchNuclearUnitDesign.PP4 (1300): bel1 &gt;
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>&lt;site: &quot;Belleville-sur-Loire&quot; (2 units)&gt; -&gt; &lt;☢️ FrenchNuclearUnitDesign.PP4 (1300): bel2 &gt;
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>&lt;site: &quot;Blayais&quot; (4 units)&gt; -&gt; &lt;☢️ FrenchNuclearUnitDesign.CP1 (900): bla1 &gt;
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>&lt;site: &quot;Blayais&quot; (4 units)&gt; -&gt; &lt;☢️ FrenchNuclearUnitDesign.CP1 (900): bla2 &gt;
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>&lt;site: &quot;Blayais&quot; (4 units)&gt; -&gt; &lt;☢️ FrenchNuclearUnitDesign.CP1 (900): bla3 &gt;
 </code></pre></div>
 </div>
 </div>
 </div>
 <h3 id="query-units-by-design">Query units by design<a class="headerlink" href="#query-units-by-design" title="Permanent link">&para;</a></h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Code</label><label for="__tabbed_3_2">Result</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Code</label><label for="__tabbed_5_2">Result</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">parc.configs.edf.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">FrenchNuclearUnit</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;900 MW series : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">FrenchNuclearUnit</span><span class="o">.</span><span class="n">get_900</span><span class="p">())</span><span class="si">}</span><span class="s2"> units&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1300 MW series: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">FrenchNuclearUnit</span><span class="o">.</span><span class="n">get_1300</span><span class="p">())</span><span class="si">}</span><span class="s2"> units&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1450 MW series: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">FrenchNuclearUnit</span><span class="o">.</span><span class="n">get_1450</span><span class="p">())</span><span class="si">}</span><span class="s2"> units&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1600 MW series: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">FrenchNuclearUnit</span><span class="o">.</span><span class="n">get_1600</span><span class="p">())</span><span class="si">}</span><span class="s2"> units&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">parc.configs.edf.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">FrenchNuclearUnit</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;900 MW series : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">FrenchNuclearUnit</span><span class="o">.</span><span class="n">get_900</span><span class="p">())</span><span class="si">}</span><span class="s2"> units&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1300 MW series: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">FrenchNuclearUnit</span><span class="o">.</span><span class="n">get_1300</span><span class="p">())</span><span class="si">}</span><span class="s2"> units&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1450 MW series: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">FrenchNuclearUnit</span><span class="o">.</span><span class="n">get_1450</span><span class="p">())</span><span class="si">}</span><span class="s2"> units&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;1600 MW series: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">FrenchNuclearUnit</span><span class="o">.</span><span class="n">get_1600</span><span class="p">())</span><span class="si">}</span><span class="s2"> units&quot;</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>900 MW series : 32 units
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>1300 MW series: 20 units
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>1450 MW series: 4 units
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>1600 MW series: 1 units
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>900 MW series : 32 units
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>1300 MW series: 20 units
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>1450 MW series: 4 units
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>1600 MW series: 1 units
 </code></pre></div>
 </div>
 </div>
@@ -928,58 +1033,58 @@
 <a href="https://www.edfenergy.com/sites/default/files/introduction_to_the_safety_security_and_environmental_report.pdf">EDF Coding System (ECS)</a>
 references found in documents or free text.</p>
 <h3 id="extract-references-from-a-string">Extract references from a string<a class="headerlink" href="#extract-references-from-a-string" title="Permanent link">&para;</a></h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Code</label><label for="__tabbed_4_2">Result</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Code</label><label for="__tabbed_6_2">Result</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ecs-inspect<span class="w"> </span>extract<span class="w"> </span><span class="s2">&quot;check valve ASG021EC1 and pump RCV001PO&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ecs-inspect<span class="w"> </span>extract<span class="w"> </span><span class="s2">&quot;check valve ASG021EC1 and pump RCV001PO&quot;</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>ASG021EC1
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>RCV001PO-
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ASG021EC1
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>RCV001PO-
 </code></pre></div>
 </div>
 </div>
 </div>
 <h3 id="extract-references-from-a-file">Extract references from a file<a class="headerlink" href="#extract-references-from-a-file" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ecs-inspect<span class="w"> </span>extract-file<span class="w"> </span>report.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ecs-inspect<span class="w"> </span>extract-file<span class="w"> </span>report.txt
 </code></pre></div>
 <h3 id="validate-a-reference">Validate a reference<a class="headerlink" href="#validate-a-reference" title="Permanent link">&para;</a></h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Code</label><label for="__tabbed_5_2">Result</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Code</label><label for="__tabbed_7_2">Result</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ecs-inspect<span class="w"> </span>validate<span class="w"> </span>ASG021EC1
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>ecs-inspect<span class="w"> </span>validate<span class="w"> </span>ASG021EC1
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Query: ASG021EC1
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>Normalized: ASG021EC1
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>Exact Match: yes
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>Candidates: 1
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>Truncated: no
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>- type: rf
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>  raw: ASG021EC1
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>  canonical: ASG021EC1
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>  span: 0-9
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>  system: ASG
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>  system_label: Alimentation auxiliaire de secours des GV
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>  identification: 021
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>  base_function: 0
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>  order: 21
-<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>  material: EC1
-<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>  material_qualifier_meanings: Enclenché
-<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>  decomposition:
-<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>    tranche_segment: &lt;absent&gt; -&gt; Tranche non précisée
-<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>    system_segment: ASG -&gt; Alimentation auxiliaire de secours des GV
-<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>    system_letter_1: A -&gt; Alimentation en eau - poste d&#39;eau
-<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>    system_letters_2_3: SG -&gt; Partie spécifique du trigramme système
-<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>    identification_segment: 021 -&gt; Format compact sans sous-fonction
-<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>    identification_digit_1: 0 -&gt; Fonction de base
-<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>    identification_digits_2_3: 21 -&gt; Ordre 21
-<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>    material_segment: EC1
-<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>    material_bigram: EC
-<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>    material_qualifier: 1 -&gt; Enclenché
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Query: ASG021EC1
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>Normalized: ASG021EC1
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>Exact Match: yes
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>Candidates: 1
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>Truncated: no
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>- type: rf
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>  raw: ASG021EC1
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>  canonical: ASG021EC1
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>  span: 0-9
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>  system: ASG
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>  system_label: Alimentation auxiliaire de secours des GV
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>  identification: 021
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>  base_function: 0
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>  order: 21
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>  material: EC1
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>  material_qualifier_meanings: Enclenché
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>  decomposition:
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>    tranche_segment: &lt;absent&gt; -&gt; Tranche non précisée
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>    system_segment: ASG -&gt; Alimentation auxiliaire de secours des GV
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>    system_letter_1: A -&gt; Alimentation en eau - poste d&#39;eau
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a>    system_letters_2_3: SG -&gt; Partie spécifique du trigramme système
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a>    identification_segment: 021 -&gt; Format compact sans sous-fonction
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a>    identification_digit_1: 0 -&gt; Fonction de base
+<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a>    identification_digits_2_3: 21 -&gt; Ordre 21
+<a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a>    material_segment: EC1
+<a id="__codelineno-16-27" name="__codelineno-16-27" href="#__codelineno-16-27"></a>    material_bigram: EC
+<a id="__codelineno-16-28" name="__codelineno-16-28" href="#__codelineno-16-28"></a>    material_qualifier: 1 -&gt; Enclenché
 </code></pre></div>
 </div>
 </div>
@@ -992,7 +1097,7 @@ references found in documents or free text.</p>
 <li><a href="https://app.electricitymaps.com/">Electricity Maps</a></li>
 </ul>
 <h2 id="about-the-author">About the author<a class="headerlink" href="#about-the-author" title="Permanent link">&para;</a></h2>
-<p>I'm PhD Joris GUERRY, research engineer at EDF (Électricité de France). Check out my <a href="https://linkedin.com/in/jorisguerry">LinkedIn profile</a> for more.</p>
+<p>I'm PhD Joris GUERRY, research engineer at EDF (Électricité de France) until June 2026. Check out my <a href="https://linkedin.com/in/jorisguerry">LinkedIn profile</a> for more.</p>
 <h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>GitHub</strong>: <a href="https://github.com/lakodo/parc/">https://github.com/lakodo/parc/</a></li>

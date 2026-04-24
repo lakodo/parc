@@ -1,7 +1,7 @@
 site_name: parc
 repo_url: https://github.com/lakodo/parc
 site_url: https://lako.do/parc
-site_description: Wrap dask scheduler to make it easy to buid datascience flow
+site_description: A model of Earth electric grid
 site_author: Joris GUERRY
 edit_uri: edit/main/docs/
 repo_name: lakodo/parc

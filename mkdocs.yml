@@ -38,6 +38,7 @@ plugins:
             show_symbol_type_toc: true
 theme:
   name: material
+  custom_dir: overrides
   features:
     - navigation.tabs
     - content.code.copy

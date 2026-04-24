@@ -1,5 +1,7 @@
 # parc
 
+![parc hero showing a connected electric grid panorama with nuclear, hydro, solar, wind, substations, and transmission lines](docs/assets/images/parc-social-card.png)
+
 [![Release](https://img.shields.io/github/v/release/lakodo/parc)](https://img.shields.io/github/v/release/lakodo/parc)
 [![Build status](https://img.shields.io/github/actions/workflow/status/lakodo/parc/main-dev.yml?branch=dev)](https://github.com/lakodo/parc/actions/workflows/main-dev.yml?query=branch%3Adev)
 [![codecov](https://codecov.io/gh/lakodo/parc/branch/main/graph/badge.svg)](https://codecov.io/gh/lakodo/parc)

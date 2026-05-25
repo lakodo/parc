@@ -131,3 +131,23 @@ def test_validate_command_with_location_wildcard_without_tranche_list_only() -> 
 
     assert result.exit_code == 0
     assert result.stdout.splitlines() == ["HRA0503ZL-"]
+
+
+def test_validate_command_accepts_zero_instead_of_o() -> None:
+    result = runner.invoke(app, ["validate", "RCV002P0", "--limit", "1"])
+
+    assert result.exit_code == 0
+    assert "Query: RCV002P0" in result.stdout
+    assert "Normalized: RCV002PO" in result.stdout
+    assert "Exact Match: no" in result.stdout
+    assert "Candidates: 1" in result.stdout
+    assert "canonical: RCV002PO-" in result.stdout
+
+
+def test_validate_command_accepts_zero_instead_of_o_exact() -> None:
+    result = runner.invoke(app, ["validate", "RCV002P0-"])
+
+    assert result.exit_code == 0
+    assert "Query: RCV002P0-" in result.stdout
+    assert "Normalized: RCV002PO-" in result.stdout
+    assert "Exact Match: yes" in result.stdout

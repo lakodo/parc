@@ -102,3 +102,20 @@ def test_validate_rf_with_minimatch_patterns():
 
     assert [str(candidate) for candidate in precise.candidates[:3]] == ["ASG000PO-", "ASG001PO-", "ASG002PO-"]
     assert not invalid.has_candidates
+
+
+def test_validate_rf_accepts_zero_instead_of_o() -> None:
+    result = ecs.validate_rf("RCV002P0", limit=5)
+
+    assert not result.is_exact_match
+    assert result.has_candidates
+    assert result.normalized_query == "RCV002PO"
+    assert any(str(c).startswith("RCV002PO") for c in result.candidates)
+
+
+def test_validate_rf_zero_o_exact_correction() -> None:
+    result = ecs.validate_rf("RCV002P0-")
+
+    assert result.is_exact_match
+    assert result.normalized_query == "RCV002PO-"
+    assert str(result.candidates[0]) == "RCV002PO-"
